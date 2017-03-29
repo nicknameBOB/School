@@ -1,0 +1,119 @@
+/*
+ * STKfortesting.c
+ *
+ * Created: 16.01.2017 19.04.20
+ * Author : jstee
+ */ 
+ #define F_CPU 16000000UL //16Mhz
+#include <avr/io.h> //Fordi AVR
+#include <util/delay.h> //Gjør det mulig å sløse tid
+#define LED1_on DDRD &= ~(0x01); //Led 1 on. Ledene er koblet mot Vcc. så lav utgang = lys.
+#define LED1_off DDRD |= 0x01;  //led 1 off.
+#define LED_Rekke_on PORTD &= ~(1<<i); // Rekke en om gangen skruer seg på. 
+#define LED_Rekke_off PORTD |= (1<<(i-1)); //Rekke en om gang skruer seg av.
+
+uint8_t i= 0;
+
+// En void som skrur 8 lys på og så av
+void forifori()
+{
+
+	for (i = 0; i<8; i++)
+	{
+		LED_Rekke_on
+		_delay_ms(300);
+		
+	}
+		for (i = 8; i>0; i--)
+		{
+			LED_Rekke_off;
+			_delay_ms(300);
+			
+		}
+}
+	//Hvis knapp 7 presses så skjer noe
+	//Det som skjer er at leden slår seg av og på med lavere frekvens
+	void knapp7()
+	{
+		if (!(PINB & 0x80))
+		{
+for (int i = 0; i< 8; i++)
+	{
+
+		LED1_on;
+			while(k<i)
+			{
+				_delay_ms(100);
+				k = k +1;
+			}
+			k = 0;
+		
+		LED1_off;
+			while(k<i)
+			{
+				_delay_ms(100);
+				k = k+ 1;
+				
+			}
+			k = 0;
+
+	}
+	for (int i = 8; i > 0; i--)
+	{
+
+		LED1_on; 
+		while(k<i)
+		{
+			_delay_ms(100);
+			k = k +1;
+		}
+		k = 0;
+		
+		LED1_off;  
+		while(k<i)
+		{
+			_delay_ms(100);
+			k = k+ 1;
+			
+		}
+		k = 0;
+
+	}
+
+		}
+	}
+	//knapp som setter alle pinene i register D lav.
+	void knapp6()
+	{
+		if (!(PINB & 0x40))
+		{
+		PORD = 0xFF;
+		}
+	}
+//Knapp 5 slår på forløkken som slår alt av og på i sekvens.
+		void knapp5()
+		{
+			if (!(PINB & 0x20))
+			{
+				forifori();
+			
+			}
+		}
+
+	
+int main(void)
+{
+	DDRD = 0xFF;
+	DDRB = 0x00;
+	PORTD = 0xFF;
+
+	/* Replace with your application code */
+	while (1)
+	{
+		knapp7();
+		knapp6();
+		
+	}
+	return(0);
+}
+
