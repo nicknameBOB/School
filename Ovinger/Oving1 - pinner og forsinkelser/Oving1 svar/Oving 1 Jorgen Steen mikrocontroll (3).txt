@@ -4,17 +4,17 @@
  * Created: 16.01.2017 19.04.20
  * Author : jstee
  */ 
- #define F_CPU 16000000UL //16Mhz
+#define F_CPU 16000000UL //16Mhz
 #include <avr/io.h> //Fordi AVR
-#include <util/delay.h> //Gjør det mulig å sløse tid
-#define LED1_on DDRD &= ~(0x01); //Led 1 on. Ledene er koblet mot Vcc. så lav utgang = lys.
+#include <util/delay.h> //GjÃ¸r det mulig Ã¥ slÃ¸se tid
+#define LED1_on DDRD &= ~(0x01); //Led 1 on. Ledene er koblet mot Vcc. sÃ¥ lav utgang = lys.
 #define LED1_off DDRD |= 0x01;  //led 1 off.
-#define LED_Rekke_on PORTD &= ~(1<<i); // Rekke en om gangen skruer seg på. 
+#define LED_Rekke_on PORTD &= ~(1<<i); // Rekke en om gangen skruer seg pÃ¥. 
 #define LED_Rekke_off PORTD |= (1<<(i-1)); //Rekke en om gang skruer seg av.
 
 uint8_t i= 0;
 
-// En void som skrur 8 lys på og så av
+// En void som skrur 8 lys pÃ¥ og sÃ¥ av
 void forifori()
 {
 
@@ -31,8 +31,8 @@ void forifori()
 			
 		}
 }
-	//Hvis knapp 7 presses så skjer noe
-	//Det som skjer er at leden slår seg av og på med lavere frekvens
+	//Hvis knapp 7 presses sÃ¥ skjer noe
+	//Det som skjer er at leden slÃ¥r seg av og pÃ¥ med lavere frekvens
 	void knapp7()
 	{
 		if (!(PINB & 0x80))
@@ -90,7 +90,7 @@ for (int i = 0; i< 8; i++)
 		PORD = 0xFF;
 		}
 	}
-//Knapp 5 slår på forløkken som slår alt av og på i sekvens.
+//Knapp 5 slÃ¥r pÃ¥ forlÃ¸kken som slÃ¥r alt av og pÃ¥ i sekvens.
 		void knapp5()
 		{
 			if (!(PINB & 0x20))
